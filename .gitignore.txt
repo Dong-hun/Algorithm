@@ -35,4 +35,12 @@
 *.out
 *.app
 
+# addcustom
+*.vsiax
+*.lock
+*.suo
+*.db
+*.ipch
+*.tlog
+
 # End of https://www.toptal.com/developers/gitignore/api/c++
