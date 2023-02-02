@@ -8,3 +8,5 @@
 //#define 기사단원의무기
 //#define 과일장수
 //#define 무인도여행
+//#define 뒤에있는큰수찾기
+#define 호텔대실

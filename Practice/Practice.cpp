@@ -1,6 +1,8 @@
 ﻿#include "DefineSolutionList.h"
 #include <iostream>
 
+using namespace std;
+
 #ifdef 개인정보수집유효기간
 
 #include <string>
@@ -356,6 +358,144 @@ int BFS(int n, int m, vector<string> maps)
 }
 #endif // 무인도여행
 
+#ifdef 뒤에있는큰수찾기
+#include <string>
+#include <vector>
+#include <stack>
+
+using namespace std;
+
+vector<int> solution(vector<int> numbers) {
+    vector<int> answer;
+    answer.resize(numbers.size(), -1);
+    stack<pair<int, int>> s;
+
+    // 반복문 진행
+    for (int i = 0; i < numbers.size(); i++)
+    {
+        // pair로 인덱스와 인덱스의 값 생성
+        pair<int, int> p = make_pair(i, numbers[i]);
+
+        // 만약 스텍이 비어있다면
+        if (s.empty())
+        {
+            // 바로 넣어줌
+            s.push(p);
+        }
+        // 아니라면
+        else
+        {
+            // 비어있지 않을때까지 검사해서
+            while (!s.empty())
+            {
+                // 스텍의 가장 윗부분 가져오기
+                pair<int, int> tmp = s.top();
+
+                // 스택의 가장 윗부분의 값이 들어온 값 이상이라면 (4 >= 3)
+                if (tmp.second >= p.second)
+                {
+                    // 스택에 넣어주고 반복문 빠져나옴
+                    s.push(p);
+                    break;
+                }
+                // 값보다 작다면
+                else
+                {
+                    // 가져온 스택의 인덱스에 현재 검사중인 인덱스 값을 넣어줌
+                    answer[tmp.first] = p.second;
+
+                    // 그 후 스텍에서 pop해줌
+                    s.pop();
+
+                    // pop한 뒤 스텍이 비어있다면 p를 넣어줌.
+                    if (s.empty())
+                        s.push(p);
+                }
+            }
+        }
+
+    }
+
+    return answer;
+}
+#endif //뒤에있는큰수찾기
+
+#ifdef 호텔대실
+#include <string>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+int solution(vector<vector<string>> book_time) 
+{
+    int answer = 0;
+
+    //priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    vector<pair<int, int>> v1;  // 시간순으로 정렬할 vector
+    vector<pair<int, int>> v2;  // 방 갯수 vector
+
+    // 오름차순으로 정렬
+    for (int i = 0; i < book_time.size(); i++)
+    {
+        int startHour = stoi(book_time[i][0].substr(0, 2));
+        int startMin = stoi(book_time[i][0].substr(3, 2));
+
+        int endHour = stoi(book_time[i][1].substr(0, 2));
+        int endMin = stoi(book_time[i][1].substr(3, 2));
+
+        startHour *= 100;
+        endHour *= 100;
+
+        if (endMin == 50)
+        {
+            endHour += 10;
+            endMin = 0;
+        }
+        else
+            endMin += 10;
+
+        v1.push_back(make_pair(startHour + startMin, endHour + endMin));
+    }
+
+    sort(v1.begin(), v1.end());
+
+    // 정렬된 방 사이즈만큼 돌기
+    for (int i = 0; i < v1.size(); i++)
+    {
+        // 방 갯수가 비어있다면 바로 넣어줌
+        if (v2.empty())
+            v2.push_back(v1[i]);
+        else
+        {
+            // 아니라면 v2만큼 돌아서 종료 시간이 가장 빠른곳의 인덱스랑 시간을 찾음
+            int idx = -1;
+            int fastTime = 2500;
+            for (int j = 0; j < v2.size(); j++)
+            {
+                if (v2[j].second < fastTime)
+                {
+                    idx = j;
+                    fastTime = v2[j].second;
+                }
+            }
+
+            // 위에서 구한 가장 빠른 종료시각이랑 현재 시작 시간이랑 비교해서 같거나 크다면 그 방이랑 교체
+            if (v2[idx].second <= v1[i].first)
+                v2[idx] = v1[i];
+            // 아니라면 넣어줌
+            else
+                v2.push_back(v1[i]);
+
+            int size = v2.size();
+            answer = max(answer, size);
+        }
+    }
+
+    return answer;
+}
+#endif // 호텔대실
+
 
 int main()
 {
@@ -427,5 +567,17 @@ int main()
     }
 
 #endif // 무인도여행
+#ifdef 뒤에있는큰수찾기
 
+#endif // 뒤에있는큰수찾기
+#ifdef 호텔대실
+
+    vector<vector<string>> v =
+    {
+        {"15:00", "17:00"} ,{"16:40", "18:20"},{"14:20", "15:20"},{"14:10", "19:20"},{"18:20", "21:20"}
+    };
+
+    cout << solution(v) << endl;
+
+#endif // 호텔대실
 }
