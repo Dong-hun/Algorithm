@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#ifdef 개인정보수집유효기간
+#ifdef 개인정보수집유효기간LV1
 
 #include <string>
 #include <sstream>
@@ -57,9 +57,9 @@ vector<int> solution(string today, vector<string> terms, vector<string> privacie
     return answer;
 }
 
-#endif // 개인정보수집유효기간
+#endif // 개인정보수집유효기간LV1
 
-#ifdef 크기가작은부분문자열
+#ifdef 크기가작은부분문자열LV1
 #include <string>
 #include <vector>
 
@@ -96,9 +96,9 @@ int solution(string t, string p)
     
     return answer;
 }
-#endif // 크기가작은부분문자열
+#endif // 크기가작은부분문자열LV1
 
-#ifdef 가장가까운같은글자
+#ifdef 가장가까운같은글자LV1
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -125,9 +125,9 @@ vector<int> solution(string s)
 
     return answer;
 }
-#endif // 가장가까운같은글자
+#endif // 가장가까운같은글자LV1
 
-#ifdef 문자열나누기
+#ifdef 문자열나누기LV1
 #include <string>
 #include <vector>
 
@@ -167,9 +167,9 @@ int solution(string s)
 
     return answer;
 }
-#endif // 문자열나누기
+#endif // 문자열나누기LV1
 
-#ifdef 명예의전당1
+#ifdef 명예의전당1LV1
 #include <string>
 #include <vector>
 #include <queue>
@@ -199,9 +199,9 @@ vector<int> solution(int k, vector<int> score)
 
     return answer;
 }
-#endif // 명예의전당1
+#endif // 명예의전당1LV1
 
-#ifdef 기사단원의무기
+#ifdef 기사단원의무기LV1
 #include <string>
 #include <vector>
 
@@ -228,9 +228,9 @@ int solution(int number, int limit, int power)
     }
     return answer;
 }
-#endif // 기사단원의무기
+#endif // 기사단원의무기LV1
 
-#ifdef 과일장수
+#ifdef 과일장수LV1
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -272,9 +272,9 @@ int solution(int k, int m, vector<int> score)
 
     return answer;
 }
-#endif // 과일장수
+#endif // 과일장수LV1
 
-#ifdef 무인도여행
+#ifdef 무인도여행LV2
 #include <string>
 #include <vector>
 #include <queue>
@@ -356,9 +356,9 @@ int BFS(int n, int m, vector<string> maps)
 
     return add;
 }
-#endif // 무인도여행
+#endif // 무인도여행LV2
 
-#ifdef 뒤에있는큰수찾기
+#ifdef 뒤에있는큰수찾기LV2
 #include <string>
 #include <vector>
 #include <stack>
@@ -418,14 +418,14 @@ vector<int> solution(vector<int> numbers) {
 
     return answer;
 }
-#endif //뒤에있는큰수찾기
+#endif //뒤에있는큰수찾기LV2
 
-#ifdef 호텔대실
+#ifdef 호텔대실LV2
 #include <string>
 #include <vector>
 #include <queue>
 
-using namespace std;
+//using namespace std;
 
 int solution(vector<vector<string>> book_time) 
 {
@@ -438,22 +438,26 @@ int solution(vector<vector<string>> book_time)
     // 오름차순으로 정렬
     for (int i = 0; i < book_time.size(); i++)
     {
+        // 시작 시간, 분
         int startHour = stoi(book_time[i][0].substr(0, 2));
         int startMin = stoi(book_time[i][0].substr(3, 2));
 
+        // 종료 시간, 분
         int endHour = stoi(book_time[i][1].substr(0, 2));
         int endMin = stoi(book_time[i][1].substr(3, 2));
 
-        startHour *= 100;
-        endHour *= 100;
-
-        if (endMin == 50)
+        // 종료시간은 +10분을 더해서 청소시간까지 합계되게 계산 (만약 50분이면 시간을 추가하고 분을 0으로 초기화)
+        if (endMin >= 50)
         {
-            endHour += 10;
-            endMin = 0;
+            endHour++;
+            endMin %= 10;
         }
         else
             endMin += 10;
+
+        // HH:MM -> HHMM으로 변경하기위헤 시간에 100을 곱해줌
+        startHour *= 100;
+        endHour *= 100;
 
         v1.push_back(make_pair(startHour + startMin, endHour + endMin));
     }
@@ -486,15 +490,15 @@ int solution(vector<vector<string>> book_time)
             // 아니라면 넣어줌
             else
                 v2.push_back(v1[i]);
-
-            int size = v2.size();
-            answer = max(answer, size);
         }
+
+        int size = v2.size();
+        answer = max(answer, size);
     }
 
     return answer;
 }
-#endif // 호텔대실
+#endif // 호텔대실LV2
 
 
 int main()
@@ -502,7 +506,7 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-#ifdef 개인정보수집유효기간
+#ifdef 개인정보수집유효기간LV1
     string today = "2020.01.01";
     vector<string> terms = 
     { "Z 3", 
@@ -522,24 +526,24 @@ int main()
     cout << endl;
 
 
-#endif // 개인정보수집유효기간
-#ifdef 크기가작은부분문자열
+#endif // 개인정보수집유효기간LV1
+#ifdef 크기가작은부분문자열LV1
     string t = "500220839878";
     string p = "7";
 
-#endif // 크기가작은부분문자열
-#ifdef 가장가까운같은글자
+#endif // 크기가작은부분문자열LV1LV1LV1
+#ifdef 가장가까운같은글자LV1
     vector<int> answer = solution("baaab");
 
     for (int i = 0; i < answer.size(); i++)
         cout << answer[i] << endl;
 
-#endif // 가장가까운같은글자
-#ifdef 문자열나누기
+#endif // 가장가까운같은글자LV1
+#ifdef 문자열나누기LV1
     cout << solution("abracadabra") << endl;
     //cout << solution("aaabbaccccabba") << endl;
-#endif // 문자열나누기
-#ifdef 명예의전당1
+#endif // 문자열나누기LV1
+#ifdef 명예의전당1LV1
 
     vector<int> tmp = { 10, 100, 20, 150, 1, 100, 200 };
     vector<int> ans = solution(3, tmp);
@@ -548,16 +552,16 @@ int main()
         cout << ans[i] << endl;
 
 
-#endif // 명예의전당1
-#ifdef 기사단원의무기
+#endif // 명예의전당1LV1
+#ifdef 기사단원의무기LV1
     cout << solution(10, 3, 2);
-#endif // 기사단원의무기
-#ifdef 과일장수
+#endif // 기사단원의무기LV1
+#ifdef 과일장수LV1
     vector<int> score = { 4, 1, 2, 2, 4, 4, 4, 4, 1, 2, 4, 2 };
     cout << solution(4, 3, score);
 
-#endif // 과일장수
-#ifdef 무인도여행
+#endif // 과일장수LV1
+#ifdef 무인도여행LV2
 
     vector<string> maps = { "X591X","X1X5X","X231X", "1XXX1" };
     vector<int> ans = solution(maps);
@@ -566,18 +570,19 @@ int main()
         cout << ans[i];
     }
 
-#endif // 무인도여행
-#ifdef 뒤에있는큰수찾기
+#endif // 무인도여행LV2
+#ifdef 뒤에있는큰수찾기LV2
+#endif // 뒤에있는큰수찾기LV2
 
-#endif // 뒤에있는큰수찾기
-#ifdef 호텔대실
+#ifdef 호텔대실LV2
 
     vector<vector<string>> v =
     {
-        {"15:00", "17:00"} ,{"16:40", "18:20"},{"14:20", "15:20"},{"14:10", "19:20"},{"18:20", "21:20"}
+        //{"15:00", "17:00"} ,{"16:40", "18:20"},{"14:20", "15:20"},{"14:10", "19:20"},{"18:20", "21:20"}
+        {"10:00", "10:10"}, {"10:20", "10:30"}
     };
 
     cout << solution(v) << endl;
 
-#endif // 호텔대실
+#endif // 호텔대실LV2
 }
