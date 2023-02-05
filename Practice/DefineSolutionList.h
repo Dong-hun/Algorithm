@@ -9,4 +9,6 @@
 //#define 과일장수
 //#define 무인도여행
 //#define 뒤에있는큰수찾기
-#define 호텔대실
+//#define 호텔대실LV2
+//#define 둘만의암호LV1
+#define 숫자변환하기LV2
