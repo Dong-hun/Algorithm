@@ -500,7 +500,7 @@ int solution(vector<vector<string>> book_time)
 }
 #endif // 호텔대실LV2
 
-#ifdef 둘만의암호
+#ifdef 둘만의암호LV1
 #include <string>
 #include <vector>
 
@@ -509,35 +509,31 @@ using namespace std;
 
 char GetAlphabet(char c, string skip, int idx)
 {
-    // 알파벳을 숫자로 변환
-    int tmp = 0;
-    int cnt = 0;
+    int tmp = c;
+    int size = skip.size();
 
-    // 인덱스 만큼 돌아서 skip 검사
     for (int i = 1; i <= idx; i++)
     {
-        tmp = int(c) + i;
-        if (tmp > 122)
-            tmp -= 26;
+        tmp++;
+        if (tmp > 'z')
+            tmp = 'a';
 
-        for (int j = 0; j < skip.size(); j++)
+        int idx = 0;
+        while (idx < size)
         {
-            if (tmp == (int)skip[j])
+            if (tmp > 'z')
+                tmp = 'a';
+            if (tmp == skip[idx])
             {
-                cnt++;
-                break;
+                tmp++;
+                idx = 0;
             }
+            else
+                idx++;
         }
     }
 
-    tmp = (int)c + idx;
-    if (tmp > 122)
-        tmp -= 25;
-    tmp += cnt;
-    if (tmp > 122)
-        tmp -= 25;
-
-    return (char)(tmp);
+    return tmp;
 }
 
 string solution(string s, string skip, int index) {
@@ -548,67 +544,73 @@ string solution(string s, string skip, int index) {
 
     return answer;
 }
-#endif // 둘만의암호
+#endif // 둘만의암호LV1
 
 #ifdef 숫자변환하기LV2
 #include <string>
 #include <vector>
-#include <queue>
-
-#define MAX 1000000
-
-int arr[MAX] = { -1, };
 
 using namespace std;
 
-void BFS(int x, int y, int n, int m)
+vector<int> dp;
+
+bool IsDivided(int a, int b)
 {
-    int a = x + n;
-    int b = x * 2;
-    int c = x * 3;
-    int cnt = m + 1;
-
-    if (c <= y)
-    {
-        if (arr[c] == -1)
-            arr[c] = cnt;
-        else
-            arr[c] = min(arr[c], cnt);
-
-        BFS(c, y, n, cnt);
-    }
-    if (b <= y)
-    {
-        if (arr[b] == -1)
-            arr[b] = cnt;
-        else
-            arr[b] = min(arr[b], cnt);
-
-        if (c != b)
-            BFS(b, y, n, cnt);
-    }
-    if (a <= y)
-    {
-        if (arr[a] == -1)
-            arr[a] = cnt;
-        else
-            arr[a] = min(arr[a], cnt);
-
-        if (c != a && b != a)
-            BFS(a, y, n, cnt);
-    }
+    return a / b > 0 && a % b == 0;
 }
 
-int solution(int x, int y, int n) {
+int solution(int x, int y, int n) 
+{
+    dp.resize(y + 1, INT_MAX);
+    dp[x] = 0;
 
-    memset(arr, -1, sizeof(arr));
-    BFS(x, y, n, 0);
+    for (int i = x + 1; i < y + 1; i++)
+    {
+        int a = INT_MAX;
+        int b = INT_MAX;
+        int c = INT_MAX;
 
-    return arr[y];
+        if (IsDivided(i, 2) && (i / 2) >= x)
+            a = dp[i / 2];
+        if (IsDivided(i, 3) &&  (i / 3) >= x)
+            b = dp[i / 3];
+        if ((i - n) >= x)
+            c = dp[i  - n];
+
+        int d = min(a, b);
+        d = min(d, c);
+
+        dp[i] = d < INT_MAX ? d + 1 : INT_MAX;                                     
+    }
+
+    if (dp[y] < INT_MAX)
+        return dp[y];
+    else
+        return -1;
 }
 
 #endif // 숫자변환하기LV2
 
+#ifdef 시소짝꿍LV2
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <map>
+
+using namespace std;
+
+long long solution(vector<int> weights) {
+    long long answer = 0;
+    vector<int> v1 = weights;
+    sort(v1.begin(), v1.end());
+
+    for (int i = 0; i < v1.size() - 1; i++)
+    {
+    }
+
+    return answer;
+}
+#endif // 시소짝꿍LV2
 
 
 int main()
@@ -683,7 +685,6 @@ int main()
 #endif // 무인도여행LV2
 #ifdef 뒤에있는큰수찾기LV2
 #endif // 뒤에있는큰수찾기LV2
-
 #ifdef 호텔대실LV2
 
     vector<vector<string>> v =
@@ -694,33 +695,22 @@ int main()
 
     cout << solution(v) << endl;
 
-<<<<<<< HEAD
+
 #endif // 호텔대실
-#ifdef 둘만의암호
+#ifdef 둘만의암호LV1
 
-
-    //string s = "z";
-    //string skip = "abcdefghij";
-    //int index = 20;
+    string s = "z";
+    string skip = "abcdefghij";
+    int index = 20;
 
     //string s = "aukks";
     //string skip = "wbqd";
     //int index = 5;
 
-    char c = 'z';
-    c += 20;
-    c -= 26;
-    c += 10;
-    c -= 26;
-    cout << c << endl;
-
-    //cout << solution(s, skip, index);
+    cout << solution(s, skip, index);
 #endif // 둘만의암호
 #ifdef 숫자변환하기LV2
-    cout << solution(10, 40, 5) << endl;
+    cout << solution(2, 5, 4) << endl;
 #endif // 숫자변환하기LV2
 
-=======
-#endif // 호텔대실LV2
->>>>>>> origin/main
 }
