@@ -1,5 +1,3 @@
 ﻿  Practice.cpp
-C:\Users\DongHun Yun\source\repos\Practice\Practice\DefineSolutionList.h(1,1): warning C4828: 파일에 0xdd 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 949).
-C:\Users\DongHun Yun\source\repos\Practice\Practice\Practice.cpp(295,24): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\DongHun Yun\source\repos\Practice\Practice\Practice.cpp(296,27): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Practice.vcxproj -> C:\Users\DongHun Yun\source\repos\Practice\x64\Debug\Practice.exe
+C:\Users\yoondh\Documents\Visual Studio 2017\Projects\AlgorithPractice\Practice\Practice.cpp(495,29): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Practice.vcxproj -> C:\Users\yoondh\Documents\Visual Studio 2017\Projects\AlgorithPractice\x64\Debug\Practice.exe
