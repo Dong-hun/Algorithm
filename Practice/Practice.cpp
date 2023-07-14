@@ -3,6 +3,7 @@
 
 using namespace std;
 
+#ifdef Programmers
 #ifdef 개인정보수집유효기간LV1
 
 #include <string>
@@ -549,6 +550,7 @@ string solution(string s, string skip, int index) {
 #ifdef 숫자변환하기LV2
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -612,6 +614,871 @@ long long solution(vector<int> weights) {
 }
 #endif // 시소짝꿍LV2
 
+#ifdef 두원사이의정수쌍LV2
+#include <string>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+int GetPointBesideCircle(int r1, int r2)
+{
+	if (r1 == r2)
+		return 0;
+
+	int cnt = 0;
+
+	for (int x = 0; x <= r2; x++)
+	{
+		if (x == 0)
+			cnt += r2 - r1 + 1;
+		else
+		{
+
+		}
+	}
+
+	return cnt * 4;
+}
+
+
+long long solution(int r1, int r2) 
+{
+	long long answer = 0;
+
+	answer = GetPointBesideCircle(r1, r2);
+
+	return answer;
+}
+#endif //두원사이의정수쌍LV2
+#endif // Programmers
+
+#ifdef Backjun
+
+#ifdef 캠핑_4796
+void solution()
+{
+	int l, p, v, idx = 0;
+
+	while (true)
+	{
+		cin >> l;	// 5
+		cin >> p;	// 8
+		cin >> v;	// 20
+
+		int answer = (v / p) * l + min(v % p, l);
+
+		cout << "Case " << ++idx << ": " << answer << endl;
+	}
+}
+#endif // 캠핑_4796
+
+#ifdef 설탕배달_2839
+
+void solution()
+{
+	int k = 0;
+	cin >> k;
+	int answer = 0;
+
+	while (k >= 0)
+	{
+		if (k % 5 == 0)
+		{
+			answer += k / 5;
+			cout << answer << endl;
+			return 0;
+		}
+		k -= 3;
+		answer++;
+	}
+
+	cout << -1 << endl;
+
+	return 0;
+}
+
+#endif // 설탕배달_2839
+
+#ifdef 회의실배정_1931
+
+#include <vector>
+#include <algorithm>
+
+void solution()
+{
+	int k;
+	vector<pair<int, int>> timeTable;
+
+	cin >> k;
+
+	// 타임 테이블 담기
+	for (int i = 0; i < k; i++)
+	{
+		int a, b = 0;
+		cin >> a;
+		cin >> b;
+
+		timeTable.push_back({ b,a });
+	}
+
+	// 종료 시점으로 오름차순 정렬
+	sort(timeTable.begin(), timeTable.end());
+
+	int cnt = 1;					// 회의실 카운트
+	int time = timeTable[0].second;	// 현재 회의실의 종료 시간
+
+	// 타임테이블만큼 돌아서
+	for (int i = 1; i < k; i++)
+	{
+		if (timeTable[i].first >= time)
+		{
+			cnt++;
+			time = timeTable[i].second;
+		}
+	}
+
+	cout << cnt << endl;
+}
+
+#endif // 회의실배정_1931
+
+#ifdef 동전제로_11047
+#include <vector>
+void solution()
+{
+	int n, k, answer = 0;
+	cin >> n >> k;
+
+	vector<int> v;
+	v.resize(n);
+
+	for (int i = 0; i < n; i++)
+		cin >> v[i];
+
+	int idx = n - 1;
+
+	while (k > 0)
+	{
+		if (k / v[idx] > 0)
+		{
+			answer += k / v[idx];
+			k %= v[idx];
+		}
+		--idx;
+	}
+
+	cout << answer << endl;
+}
+
+#endif // 동전제로_11047
+
+#ifdef 잃어버린_괄호_1541
+
+#include <string>
+
+void solution()
+{
+	int answer = 0;
+	int add = 0;
+	string s = "";
+	string num = "";
+	bool isMinus = false;
+
+	// 식 입력
+	cin >> s;					
+
+	// 입력받은 식 전부 조사
+	for (int i = 0; i <= s.size(); i++)
+	{
+		// 문자 가져옴
+		char c = s[i];
+
+		// 숫자면 num에 넣어줌
+		if ('0' <= c && c <= '9')
+			num += c;
+		// 아니라면
+		else
+		{
+			if (isMinus)
+				answer -= stoi(num);
+			else
+				answer += stoi(num);
+
+			// -가 단한번이라도 나오면 변경해줌
+			if (c == '-')
+				isMinus = true;
+
+			num = "";
+		}
+	}
+
+	cout << answer << endl;
+}
+
+#endif // 잃어버린_괄호_1541
+
+#ifdef 보물_1026
+
+#include <vector>
+#include <algorithm>
+
+void solution()
+{
+	int s, answer = 0;
+	vector<int> a;
+	vector<int> b;
+	cin >> s;
+
+	a.resize(s);
+	b.resize(s);
+
+	for (int i = 0; i < s; i++)
+		cin >> a[i];
+
+	for (int i = 0; i < s; i++)
+		cin >> b[i];
+
+	sort(a.begin(), a.end());
+	sort(b.begin(), b.end(), greater<int>());
+
+	for (int i = 0; i < a.size(); i++)
+		answer += a[i] * b[i];
+
+	cout << answer << endl;
+}
+
+#endif // 보물_1026
+
+#ifdef 거스름돈_5585
+#include <vector>
+
+void solution()
+{
+	vector<int> v = { 500, 100, 50, 10, 5 ,1 };
+	int n, answer = 0;
+	cin >> n;
+	n = 1000 - n;
+
+	for (int i = 0; i < v.size(); i++)
+	{
+		if (n / v[i] > 0)
+		{
+			answer += n / v[i];
+			n %= v[i];
+		}
+	}
+
+	cout << answer << endl;
+}
+
+#endif // 거스름돈_5585
+
+#ifdef 로프_2217
+#include <vector>
+#include <algorithm>
+
+void solution()
+{
+	vector<int> v1, v2;
+	int n;
+
+	cin >> n;
+	v1.resize(n);
+
+	for (int i = 0; i < n; i++)
+		cin >> v1[i];
+
+	// 내림차순으로 정렬
+	sort(v1.begin(), v1.end(), greater<int>());
+
+	// 중량 순으로 로프를 묶어서 최대 하중을 구함
+	for (int i = 0; i < v1.size(); i++)
+		v2.push_back(v1[i] * (i + 1));
+
+	// 구한 최대 하중을 내림차순으로 정렬
+	sort(v2.begin(), v2.end(), greater<int>());
+
+	// 가장 큰 값이 최대로 버틸 수 있는 무게이므로 맨 앞의 값을 출력
+	cout << v2[0] << endl;
+}
+
+
+#endif // 로프_2217
+
+#ifdef 수들의합_1789
+
+void solution()
+{
+	long long n;
+	long long k = 1;
+	long long sum = 0;
+	int cnt = 0;
+	cin >> n;
+
+	while (true)
+	{
+		sum += k;
+		k++;
+		if (sum > n)
+		{
+			k--;
+			break;
+		}
+	}
+
+	cout << k << endl;
+}
+#endif // 수들의합_1789
+
+#ifdef 주유소_13305
+#include <vector>
+
+
+void solution()
+{
+	int n;						// 도시 개수
+	int lowCost = 0;			// 가장 저렴한 주유소 가격
+	int lowIdx = 0;				// 가장 저렴한 주유소 위치
+	long long totalCost = 0;	// 총 이동 비용
+	vector<int> dist;			// 도시 간의 거리
+	vector<int> cost;			// 주유소의 리터당 가격
+
+	cin >> n;
+	dist.resize(n - 1);
+	cost.resize(n);
+
+	for (int i = 0; i < dist.size(); i++)
+		cin >> dist[i];
+
+	for (int i = 0; i < cost.size(); i++)
+		cin >> cost[i];
+
+	totalCost += dist[0] * cost[0];		// 첫 도시는 무조건 이동
+	lowCost = cost[0];					// 가장 저렴한곳은 처음임
+
+	for (int i = 1; i < dist.size(); i++)
+	{
+		// 가격 비교하기
+		// 만약 가장 싼 주유소가 다음 주유소보다 저렴하다면
+		if (lowCost < cost[i])
+		{
+			// 가장 싼 주유소 가격에 현재 거리만큼 곱해줌
+			totalCost += dist[i] * lowCost;
+		}
+		// 아니라면
+		else
+		{
+			// 가장 싼 주유소의 위치와 가격을 저장
+			lowCost = cost[i];
+			lowIdx = i;
+			totalCost += dist[i] * lowCost;
+		}
+	}
+
+	cout << totalCost << endl;
+}
+
+#endif // 주유소_13305
+
+#ifdef 계산기_10162
+
+void solution()
+{
+	int t;
+	cin >> t;
+
+	int a = 0;
+	int b = 0;
+	int c = 0;
+
+	if (t % 10 != 0)
+	{
+		cout << -1 << endl;
+	}
+	else
+	{
+		while (t != 0)
+		{
+			if (t / 300 > 0)
+			{
+				a += t / 300;
+				t %= 300;
+			}
+			else if (t / 60 > 0)
+			{
+				b += t / 60;
+				t %= 60;
+			}
+			else if (t / 10 > 0)
+			{
+				c += t / 10;
+				t %= 10;
+			}
+		}
+		cout << a << " " << b << " " << c << endl;
+	}
+}
+
+#endif // 계산기_10162
+
+#ifdef 삼십_10610
+#include <string>
+#include <vector>
+#include <algorithm>
+
+void solution()
+{
+	string s = "";
+	cin >> s;
+	vector<int> v;
+	int sum = 0;
+
+	for (int i = 0; i < s.size(); i++)
+	{
+		v.push_back(s[i] - '0');
+		sum += v[i];
+	}
+
+	sort(v.begin(), v.end(), greater<int>());
+
+	if (sum % 3 == 0 && v[v.size() - 1] == 0)
+		for (int i = 0; i < v.size(); i++)
+			cout << v[i];
+	else
+		cout << -1;
+}
+
+#endif // 삼십_10610
+
+#ifdef A에서B_16953
+
+void solution()
+{
+	int A, B;
+	int cnt = 0;
+	cin >> A >> B;
+
+	while (true)
+	{
+		if (A > B)
+		{
+			cout << -1;
+			break;
+		}
+		if (A == B)
+		{
+			cnt++;
+			cout << cnt;
+			break;
+		}
+
+		if (B % 10 == 1)
+		{
+			B--;
+			B /= 10;
+		}
+		else if (B % 2 == 0)
+		{
+			B /= 2;
+		}
+		else
+		{
+			cout << -1;
+			break;
+		}
+
+		cnt++;
+	}
+}
+
+#endif // A에서B_16953
+
+#ifdef 뒤집기_1439
+#include <string>
+#include <algorithm>>
+
+void solution()
+{
+	string s = "";
+	cin >> s;
+
+	int zeroCount = 0;
+	int firstCount = 0;
+
+	for (int i = 0; i < s.size(); i++)
+	{
+		if (s[i] == s[i+1])
+		{
+			if (s[i] == '0')
+				++zeroCount;
+			else
+				++firstCount;
+		}
+	}
+
+	cout << min(zeroCount, firstCount);
+}
+
+#endif // 뒤집기_1439
+
+#ifdef 세탁소사장동혁_2720
+
+void solution()
+{
+	int T;
+
+	cin >> T;
+
+	while (T--)
+	{
+		int money;
+		cin >> money;
+
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		int d = 0;
+
+		while (money)
+		{
+			if (money / 25 > 0)
+			{
+				a = money / 25;
+				money %= 25;
+			}
+			else if (money / 10 > 0)
+			{
+				b = money / 10;
+				money %= 10;
+			}
+			else if (money / 5 > 0)
+			{
+				c = money / 5;
+				money %= 5;
+			}
+			else if (money / 1 > 0)
+			{
+				d = money / 1;
+				money %= 1;
+			}
+		}
+		cout << a << " " << b << " " << c << " " << d << endl;
+	}
+}
+
+#endif // 세탁소사장동혁_2720
+
+#ifdef 기타줄_1049
+
+#include <algorithm>
+
+void solution()
+{
+	int n, m;
+	int minSetPrice = 1001, minUnitPrice = 1001;
+	int totalMoney = 0;
+	cin >> n >> m;
+
+	for (int i = 0; i < m; ++i)
+	{
+		int curSetPrice, curUnitPrice;
+		cin >> curSetPrice >> curUnitPrice;
+
+		minSetPrice  = min(minSetPrice, curSetPrice);
+		minUnitPrice = min(minUnitPrice, curUnitPrice);
+	}
+
+	while (true)
+	{
+		// 기타줄이 6개 이상일 때
+		if (n >= 6)
+		{
+			
+			if (minSetPrice > minUnitPrice * 6)			// 세트 가격이 낱개 * 6보다 비싸다면
+				totalMoney += minUnitPrice * 6;			// 총 가격에 낱개 * 6 가격을 더해줌
+			else										// 세트 가격이 낱개 * 6보다 싸다면
+				totalMoney += minSetPrice;				// 총 가격에 세트 가격을 더해줌
+
+			n -= 6;										// 계산해야되는 기타줄 개수 -6
+		}
+		// 기타줄이 6개 미만일 때
+		else
+		{
+			int totalUnitPrice = minUnitPrice * n;		// 낱개 총 가격을 구해줌
+
+			if (minSetPrice > totalUnitPrice)			// 세트 가격이 낱개 총 가격보다 비싸다면
+				totalMoney += totalUnitPrice;			// 총 가격에 낱개 총 가격을 더해줌
+			else										// 세트 가격이 낱개 총 가격보다 싸다면
+				totalMoney += minSetPrice;				// 총 가격에 세트 가격을 더해줌
+
+			// 더이상 기타줄 가격 계산을 안해도 되므로 break
+			break;
+		}
+	}
+
+	cout << totalMoney << endl;
+}
+
+#endif // 기타줄_1049
+
+#ifdef 수묶기_1744
+#include <vector>
+#include <algorithm>
+
+void solution()
+{
+	//내 답 (오답)
+	{
+		/*vector<int> v;
+		int n;
+		cin >> n;
+
+		v.resize(n);
+
+		for (int i = 0; i < n; i++)
+			cin >> v[i];
+
+		sort(v.begin(), v.end(), greater<int>());
+		int sum = 0;
+
+		while (true)
+		{
+			if (v.size() == 1)
+			{
+				sum += v.front();
+				break;
+			}
+			else if (v.empty())
+			{
+				break;
+			}
+			else
+			{
+				int a = v[0];
+				int b = v[1];
+
+				if (a > 0)
+				{
+					if (b > 0)
+					{
+						sum += (a * b);
+						v.erase(v.begin());
+						v.erase(v.begin());
+					}
+					else
+					{
+						sum += a;
+						v.erase(v.begin());
+					}
+				}
+				else if (a == 0)
+				{
+					if (v.size() > 2)
+						v.erase(v.begin());
+					else
+					{
+						sum += (a * b);
+						v.erase(v.begin());
+						v.erase(v.begin());
+					}
+				}
+				else
+				{
+					sum += (a * b);
+					v.erase(v.begin());
+					v.erase(v.begin());
+				}
+			}
+		}*/
+	}
+
+	// 정답
+	// 알고리즘
+	// 양수, 음수 끼리 모아주고 0의 갯수도 따로 카운트
+	// 1이면 그냥 sum에 더해줌
+	// 양수는 내림차순으로 정렬해서 원소 갯수가 짝수면 가장 앞 원소랑 그 다음 원소끼리 곱해줌
+	// 음수는 오름차순으로 정렬해서 원소 갯수가 짝수면 가장 앞 원소랑 그 다음 원소끼리 곱해줌
+	// 남은 음수 갯수가 홀수일 때 0 갯수만큼 곱해서 남은 음수를 0으로 만들어줌
+
+	vector<int> p;		// 양수 모음
+	vector<int> m;		// 음수 모음
+	int zeroCnt = 0;	// 0의 갯수
+	int sum = 0;		// 총 더한 값
+
+	int n, k;			// 수열 크기, 입력받을 수열 값
+	cin >> n;			// 수열 크기 입력
+
+	// 들어온 값 분류
+	for (int i = 0; i < n; i++)
+	{
+		cin >> k;				// 수열 값 입력
+		if (k > 1)				// 위의 알고리즘 대로 분류
+			p.push_back(k);
+		else if (k == 1)
+			sum += 1;
+		else if (k == 0)
+			zeroCnt++;
+		else
+			m.push_back(k);
+	}
+
+	sort(p.begin(), p.end(), greater<int>());	// 양수 내림차순 정렬
+	sort(m.begin(), m.end());					// 음수 오름차순 정렬
+
+	// 양수
+	while (true)
+	{
+		if (p.size() > 1)
+		{
+			if (p[0] != 1)
+			{
+				sum += (p[0] * p[1]);
+				p.erase(p.begin());
+				p.erase(p.begin());
+			}
+			else
+			{
+				sum += 1;
+				p.erase(p.begin());
+			}
+		}
+		else
+		{
+			if (p.size() == 1)
+				sum += p[0];
+
+			break;
+		}
+	}
+
+	// 음수
+	while (true)
+	{
+		if (m.size() > 1)
+		{
+			sum += (m[0] * m[1]);
+			m.erase(m.begin());
+			m.erase(m.begin());
+		}
+		else
+		{
+			if (m.size() == 1)
+			{
+				if (!zeroCnt)
+					sum += m[0];
+			}
+			break;
+		}
+	}
+
+
+	cout << sum << endl;
+}
+
+#endif // 수묶기_1744
+
+#ifdef 강의실배정_11000
+#include <vector>
+#include <algorithm>
+#include <queue>
+
+bool cmp(pair<int, int> p, pair<int, int> q)
+{
+	if (p.second < q.second)
+		return true;
+	
+	return false;
+}
+
+void solution()
+{
+	/*
+		알고리즘
+		준비물 : 타임테이블 담을 벡터, 수업중인 강의실 담을 벡터, 총 강의실 갯수
+
+		1. 타임 테이블을 입력받아서 수업 시작시간, 종료시간을 pair로 vector에 저장한다.
+		2. 종료시간이 가장 빠른 순으로 정렬한다.
+		3. 현재 수업과 현재 강의중인 강의실을 조사해서 종료시간이 가장 빠른 강의실을 찾는다.
+		4. 해당 강의실의 수업 종료시간보다 현재 수업의 시작시간이 크다면 (2 < 4)
+		5. 해당 강의실에 이 수업을 넣는다 (해당 수업이 종료되고 바로 현재 수업을 진행할 수 있음)
+		6. 아니라면 새 강의실을 잡아준다 (push_back)
+	*/
+
+	// 내 풀이 (오답인데 왜?)
+	{
+		//vector<pair<int, int>> timeTable;	// 타임테이블 담을 벡터
+		//vector<pair<int, int>> classRoom;	// 수업중인 강의실
+		//int a, b, c;						// 수업 갯수, 수업 시작 시간, 수업 종료 시간
+		//int maxClassRoom = 0;				// 총 강의실 갯수
+
+		//// 전부 입력 받기
+		//cin >> a;
+		//for (int i = 0; i < a; i++)
+		//{
+		//	cin >> b >> c;
+		//	timeTable.push_back({ b,c });
+		//}
+
+		//sort(timeTable.begin(), timeTable.end(), cmp);	// 종료시간이 빠른 순으로 정렬
+		//classRoom.push_back(timeTable[0]);				// 첫 수업은 바로 강의실 잡아줌
+
+		//// 수업 배치하기
+		//for (int i = 1; i < timeTable.size(); i++)
+		//{
+		//	int idx = 0;											// 종료시간이 가장 빠른 강의실 인덱스 저장용
+		//	for (int j = 0; j < classRoom.size(); j++)				// 현재 수업중인 강의실 조사해서
+		//	{
+		//		if (classRoom[j].second < classRoom[idx].second)	// 저장해놨던 종료 시간이 현재 저장한 가장 빠른강의실보다 빠르다면
+		//			idx = j;										// 해당 강의실의 인덱스 저장해줌
+		//	}
+
+		//	if (classRoom[idx].second <= timeTable[i].first)		// 종료시간이 가장 빠른 강의실 <= 현재 수업 시작 시간 (2 <= 3)
+		//	{
+		//		classRoom[idx] = timeTable[i];						// 해당 강의실을 현재 수업으로 변경
+		//	}
+		//	else													// 종료시간이 가장 빠른 강의실 > 현재 수업 시작 시간 (2 > 1)
+		//	{
+		//		classRoom.push_back(timeTable[i]);					// 강의실을 새로 잡아줌
+		//	}
+		//	int curClassRoomSize = classRoom.size();				// 현재 수업중인 강의실 갯수
+		//	maxClassRoom = max(maxClassRoom, curClassRoomSize);		// 큰값 저장
+		//}
+
+		//cout << maxClassRoom << endl;
+	}
+
+	// pq로 풀기
+	vector<pair<int, int>> timeTable;						// 수업 시간표
+	priority_queue<int, vector<int>, greater<int>> pq;		// 우선순위큐 (종료시간이 가장 빠른 순)
+	int a, b, c;	// 입력받을 값
+
+	cin >> a;
+
+	for (int i = 0; i < a; i++)
+	{
+		cin >> b >> c;
+		timeTable.push_back({ b,c });
+	}
+
+	sort(timeTable.begin(), timeTable.end());
+	pq.push(timeTable[0].second);
+
+	for (int i = 1; i < timeTable.size(); i++)
+	{
+		pq.push(timeTable[i].second);
+
+		if (pq.top() <= timeTable[i].first)
+			pq.pop();
+	}
+
+	cout << pq.size() << endl;
+}
+
+#endif // 강의실배정_11000
+
+
+#endif // Backjun
 
 int main()
 {
@@ -712,5 +1579,7 @@ int main()
 #ifdef 숫자변환하기LV2
     cout << solution(2, 5, 4) << endl;
 #endif // 숫자변환하기LV2
-
+	
+	solution();
+	system("pause");
 }
