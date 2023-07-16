@@ -474,14 +474,10 @@ int solution(vector<vector<string>> book_time)
         {
             // 아니라면 v2만큼 돌아서 종료 시간이 가장 빠른곳의 인덱스랑 시간을 찾음
             int idx = -1;
-            int fastTime = 2500;
             for (int j = 0; j < v2.size(); j++)
             {
-                if (v2[j].second < fastTime)
-                {
+                if (v2[j].second < v2[idx].second)
                     idx = j;
-                    fastTime = v2[j].second;
-                }
             }
 
             // 위에서 구한 가장 빠른 종료시각이랑 현재 시작 시간이랑 비교해서 같거나 크다면 그 방이랑 교체
@@ -609,6 +605,35 @@ int solution(int x, int y, int n) {
 
 #endif // 숫자변환하기LV2
 
+#ifdef 추억점수LV1
+#include <string>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+vector<int> solution(vector<string> name, vector<int> yearning, vector<vector<string>> photo)
+{
+    vector<int> answer;
+    map<string, int> m;
+    
+    for (int i = 0; i < name.size(); i++)
+        m[name[i]] = yearning[i];
+
+    for (int i = 0; i < photo.size(); i++)
+    {
+        int total = 0;
+        for (int j = 0; j < photo[i].size(); j++)
+            total += m[photo[i][j]];
+
+        answer.push_back(total);
+    }
+
+    return answer;
+}
+
+#endif // 추억점수LV1
+
 
 
 int main()
@@ -618,11 +643,11 @@ int main()
 
 #ifdef 개인정보수집유효기간LV1
     string today = "2020.01.01";
-    vector<string> terms = 
-    { "Z 3", 
+    vector<string> terms =
+    { "Z 3",
       "D 5" };
-    vector<string> privacies = 
-    {   "2019.01.01 D",
+    vector<string> privacies =
+    { "2019.01.01 D",
         "2019.11.15 Z",
         "2019.08.02 D",
         "2019.07.01 D",
@@ -657,7 +682,7 @@ int main()
 
     vector<int> tmp = { 10, 100, 20, 150, 1, 100, 200 };
     vector<int> ans = solution(3, tmp);
-    
+
     for (int i = 0; i < ans.size(); i++)
         cout << ans[i] << endl;
 
@@ -683,7 +708,6 @@ int main()
 #endif // 무인도여행LV2
 #ifdef 뒤에있는큰수찾기LV2
 #endif // 뒤에있는큰수찾기LV2
-
 #ifdef 호텔대실LV2
 
     vector<vector<string>> v =
@@ -694,20 +718,20 @@ int main()
 
     cout << solution(v) << endl;
 
-<<<<<<< HEAD
+    <<<<<< < HEAD
 #endif // 호텔대실
 #ifdef 둘만의암호
 
 
-    //string s = "z";
-    //string skip = "abcdefghij";
-    //int index = 20;
+        //string s = "z";
+        //string skip = "abcdefghij";
+        //int index = 20;
 
-    //string s = "aukks";
-    //string skip = "wbqd";
-    //int index = 5;
+        //string s = "aukks";
+        //string skip = "wbqd";
+        //int index = 5;
 
-    char c = 'z';
+        char c = 'z';
     c += 20;
     c -= 26;
     c += 10;
@@ -720,7 +744,18 @@ int main()
     cout << solution(10, 40, 5) << endl;
 #endif // 숫자변환하기LV2
 
-=======
-#endif // 호텔대실LV2
->>>>>>> origin/main
+#ifdef 추억점수LV1
+    vector<string> name = { "may", "kein", "kain", "radi" };
+    vector<int> yearning = { 5, 10, 1, 3 };
+    vector<vector<string>> photo =
+    { {"may", "kein", "kain", "radi"}, {"may", "kein", "brin", "deny"}, {"kon", "kain", "may", "coni"} };
+
+    vector<int> answer = solution(name, yearning, photo);
+
+    for (int i = 0; i < answer.size(); i++)
+        cout << answer[i] << endl;
+
+
+#endif // 추억점수LV1
+
 }
