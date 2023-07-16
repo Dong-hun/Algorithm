@@ -589,7 +589,7 @@ int solution(int x, int y, int n)
 
 #endif // 숫자변환하기LV2
 
-<<<<<<< HEAD
+
 #ifdef 추억점수LV1
 #include <string>
 #include <vector>
@@ -619,7 +619,7 @@ vector<int> solution(vector<string> name, vector<int> yearning, vector<vector<st
 
 #endif // 추억점수LV1
 
-=======
+
 #ifdef 시소짝꿍LV2
 #include <string>
 #include <vector>
@@ -1629,7 +1629,6 @@ int main()
 #ifdef 숫자변환하기LV2
     cout << solution(2, 5, 4) << endl;
 #endif // 숫자변환하기LV2
-<<<<<<< HEAD
 
 #ifdef 추억점수LV1
     vector<string> name = { "may", "kein", "kain", "radi" };
@@ -1645,9 +1644,9 @@ int main()
 
 #endif // 추억점수LV1
 
-=======
+
 	
 	solution();
 	system("pause");
->>>>>>> origin/main
+
 }
