@@ -40,5 +40,9 @@
 //#define 기타줄_1049
 //#define 수묶기_1744
 //#define 강의실배정_11000
+//#define 행렬_1080
+//#define 거스름돈_14916
+//#define 저울_2437
+#define 게임을만든동준이_2847
 
 #endif // Backjun

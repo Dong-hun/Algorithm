@@ -1505,6 +1505,155 @@ void solution()
 
 #endif // 강의실배정_11000
 
+#ifdef 행렬_1080
+#include <vector>
+
+void solution()
+{
+	vector<vector<int>> v1;
+	vector<vector<int>> v2;
+	int cnt = 0;
+	int n, m;
+	cin >> n >> m;
+
+	v1.resize(n, vector<int>(m, 0));
+	v2.resize(n, vector<int>(m, 0));
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+			cin >> v1[i][j];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+			cin >> v2[i][j];
+	}
+
+	for (int i = 0; i < n - 2; i++)
+	{
+		for (int j = 0; j < m - 2; j++)
+		{
+			if (v1[i][j] != v2[i][j])
+			{
+				for (int k = i; k <= i + 2; k++)
+				{
+					for (int l = j; l <= j + 2; l++)
+					{
+						v1[k][l] = 1 - v2[k][l];
+					}
+				}
+				cnt++;
+			}
+			else
+				continue;
+		}
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			if (v1[i][j] != v2[i][j])
+			{
+				cout << "-1" << endl;
+				break;
+			}
+		}
+	}
+
+	cout << cnt << endl;
+}
+
+#endif // 행렬_1080
+
+#ifdef 거스름돈_14916
+
+void solution()
+{
+	int n, ans = 0;
+	cin >> n;
+
+	while (n > 0)
+	{
+		if (n % 5 == 0)
+		{
+			cout << (n / 5) + ans << endl;
+			break;
+		}
+		ans++;
+		n -= 2;
+	}
+
+	cout << -1 << endl;
+}
+
+#endif // 거스름돈_14916
+
+#ifdef 저울_2437
+#include <vector>
+#include <algorithm>
+
+void solution()
+{
+	vector<int> v;
+	int N, ans = 0;
+
+	cin >> N;
+
+	v.resize(N);
+
+	for (int i = 0; i < N; i++)
+		cin >> v[i];
+
+	sort(v.begin(), v.end());
+	
+	// 누적합 계산이라는데 좀 더 공부할 것
+	// https://novlog.tistory.com/entry/CC-BOJ%EB%B0%B1%EC%A4%80-2437-%EC%A0%80%EC%9A%B8-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4
+	for (int i = 0; i < v.size(); i++)
+	{
+		if (v[i] > ans + 1)
+			break;
+
+		ans += v[i];
+	}
+
+	cout << ans + 1 << endl;
+}
+
+#endif // 저울_2437
+
+#ifdef 게임을만든동준이_2847
+#include <vector>
+
+void solution()
+{
+	vector<int> v;
+	int n, ans = 0;
+	cin >> n;
+
+	v.resize(n);
+
+	for (int i = 0; i < n; i++)
+		cin >> v[i];
+
+	for (int i = v.size() - 2; i >= 0;)
+	{
+		if (v[i] >= v[i + 1])
+		{
+			--v[i];
+			++ans;
+		}
+		else
+			--i;
+	}
+
+	cout << ans << endl;
+}
+
+#endif // 게임을만든동준이_2847
+
 
 #endif // Backjun
 
