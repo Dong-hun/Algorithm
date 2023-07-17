@@ -475,14 +475,10 @@ int solution(vector<vector<string>> book_time)
         {
             // 아니라면 v2만큼 돌아서 종료 시간이 가장 빠른곳의 인덱스랑 시간을 찾음
             int idx = -1;
-            int fastTime = 2500;
             for (int j = 0; j < v2.size(); j++)
             {
-                if (v2[j].second < fastTime)
-                {
+                if (v2[j].second < v2[idx].second)
                     idx = j;
-                    fastTime = v2[j].second;
-                }
             }
 
             // 위에서 구한 가장 빠른 종료시각이랑 현재 시작 시간이랑 비교해서 같거나 크다면 그 방이랑 교체
@@ -593,11 +589,43 @@ int solution(int x, int y, int n)
 
 #endif // 숫자변환하기LV2
 
+
+#ifdef 추억점수LV1
+#include <string>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+vector<int> solution(vector<string> name, vector<int> yearning, vector<vector<string>> photo)
+{
+    vector<int> answer;
+    map<string, int> m;
+    
+    for (int i = 0; i < name.size(); i++)
+        m[name[i]] = yearning[i];
+
+    for (int i = 0; i < photo.size(); i++)
+    {
+        int total = 0;
+        for (int j = 0; j < photo[i].size(); j++)
+            total += m[photo[i][j]];
+
+        answer.push_back(total);
+    }
+
+    return answer;
+}
+
+#endif // 추억점수LV1
+
+
 #ifdef 시소짝꿍LV2
 #include <string>
 #include <vector>
 #include <algorithm>
 #include <map>
+>>>>>>> origin/main
 
 using namespace std;
 
@@ -1479,6 +1507,94 @@ void solution()
 
 #ifdef 수리공항승_1449
 // 다시한번 풀것
+#ifdef 행렬_1080
+#include <vector>
+
+void solution()
+{
+	vector<vector<int>> v1;
+	vector<vector<int>> v2;
+	int cnt = 0;
+	int n, m;
+	cin >> n >> m;
+
+	v1.resize(n, vector<int>(m, 0));
+	v2.resize(n, vector<int>(m, 0));
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+			cin >> v1[i][j];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+			cin >> v2[i][j];
+	}
+
+	for (int i = 0; i < n - 2; i++)
+	{
+		for (int j = 0; j < m - 2; j++)
+		{
+			if (v1[i][j] != v2[i][j])
+			{
+				for (int k = i; k <= i + 2; k++)
+				{
+					for (int l = j; l <= j + 2; l++)
+					{
+						v1[k][l] = 1 - v2[k][l];
+					}
+				}
+				cnt++;
+			}
+			else
+				continue;
+		}
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			if (v1[i][j] != v2[i][j])
+			{
+				cout << "-1" << endl;
+				break;
+			}
+		}
+	}
+
+	cout << cnt << endl;
+}
+
+#endif // 행렬_1080
+
+#ifdef 거스름돈_14916
+
+void solution()
+{
+	int n, ans = 0;
+	cin >> n;
+
+	while (n > 0)
+	{
+		if (n % 5 == 0)
+		{
+			cout << (n / 5) + ans << endl;
+			break;
+		}
+		ans++;
+		n -= 2;
+	}
+
+	cout << -1 << endl;
+}
+
+#endif // 거스름돈_14916
+
+#ifdef 저울_2437
+>>>>>>> origin/main
 #include <vector>
 #include <algorithm>
 
@@ -1488,6 +1604,10 @@ void solution()
 	vector<int> v;
 	int N, L;
 	cin >> N >> L;
+	vector<int> v;
+	int N, ans = 0;
+
+	cin >> N;
 	v.resize(N);
 
 	for (int i = 0; i < N; i++)
@@ -1508,6 +1628,46 @@ void solution()
 			ans++;
 			start = v[i];
 		}
+	sort(v.begin(), v.end());
+	
+	// 누적합 계산이라는데 좀 더 공부할 것
+	// https://novlog.tistory.com/entry/CC-BOJ%EB%B0%B1%EC%A4%80-2437-%EC%A0%80%EC%9A%B8-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4
+	for (int i = 0; i < v.size(); i++)
+	{
+		if (v[i] > ans + 1)
+			break;
+
+		ans += v[i];
+	}
+
+	cout << ans + 1 << endl;
+}
+
+#endif // 저울_2437
+
+#ifdef 게임을만든동준이_2847
+#include <vector>
+
+void solution()
+{
+	vector<int> v;
+	int n, ans = 0;
+	cin >> n;
+
+	v.resize(n);
+
+	for (int i = 0; i < n; i++)
+		cin >> v[i];
+
+	for (int i = v.size() - 2; i >= 0;)
+	{
+		if (v[i] >= v[i + 1])
+		{
+			--v[i];
+			++ans;
+		}
+		else
+			--i;
 	}
 
 	cout << ans << endl;
@@ -1631,6 +1791,8 @@ void solution()
 	cout << rev << endl;
 }
 
+#endif // 게임을만든동준이_2847
+
 #endif // Backjun
 
 int main()
@@ -1640,11 +1802,11 @@ int main()
 
 #ifdef 개인정보수집유효기간LV1
     string today = "2020.01.01";
-    vector<string> terms = 
-    { "Z 3", 
+    vector<string> terms =
+    { "Z 3",
       "D 5" };
-    vector<string> privacies = 
-    {   "2019.01.01 D",
+    vector<string> privacies =
+    { "2019.01.01 D",
         "2019.11.15 Z",
         "2019.08.02 D",
         "2019.07.01 D",
@@ -1679,7 +1841,7 @@ int main()
 
     vector<int> tmp = { 10, 100, 20, 150, 1, 100, 200 };
     vector<int> ans = solution(3, tmp);
-    
+
     for (int i = 0; i < ans.size(); i++)
         cout << ans[i] << endl;
 
@@ -1718,21 +1880,48 @@ int main()
 
 #endif // 호텔대실
 #ifdef 둘만의암호LV1
-
+        //string s = "z";
+        //string skip = "abcdefghij";
+        //int index = 20;
     string s = "z";
     string skip = "abcdefghij";
     int index = 20;
 
-    //string s = "aukks";
-    //string skip = "wbqd";
-    //int index = 5;
+        //string s = "aukks";
+        //string skip = "wbqd";
+        //int index = 5;
 
+        char c = 'z';
+    c += 20;
+    c -= 26;
+    c += 10;
+    c -= 26;
+    cout << c << endl;
+
+    //cout << solution(s, skip, index);
     cout << solution(s, skip, index);
 #endif // 둘만의암호
 #ifdef 숫자변환하기LV2
     cout << solution(2, 5, 4) << endl;
 #endif // 숫자변환하기LV2
+
+#ifdef 추억점수LV1
+    vector<string> name = { "may", "kein", "kain", "radi" };
+    vector<int> yearning = { 5, 10, 1, 3 };
+    vector<vector<string>> photo =
+    { {"may", "kein", "kain", "radi"}, {"may", "kein", "brin", "deny"}, {"kon", "kain", "may", "coni"} };
+
+    vector<int> answer = solution(name, yearning, photo);
+
+    for (int i = 0; i < answer.size(); i++)
+        cout << answer[i] << endl;
+
+
+#endif // 추억점수LV1
+
+
 	
 	solution();
 	system("pause");
+
 }

@@ -18,6 +18,7 @@
 //#define 숫자변환하기LV2
 //#define 시소짝꿍LV2
 //#define 두원사이의정수쌍LV2
+//#define 추억점수LV1
 #endif // Programmers
 
 #ifdef Backjun
@@ -42,5 +43,8 @@
 //#define 수리공항승_1449
 //#define 오와육의차이_2864
 //#define 팰린드롬만들기_1213
-
+//#define 행렬_1080
+//#define 거스름돈_14916
+//#define 저울_2437
+#define 게임을만든동준이_2847
 #endif // Backjun
